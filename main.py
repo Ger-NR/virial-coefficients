@@ -1,17 +1,18 @@
-"""
-Testing potentials
+from src.virial import second_virial
 
-"""
-from src.potential import stock_mayerBIT
-from src.potential import leonard_jones
+# Parámetros del potencial
+epsilon = 1
+sigma = 1
+mu = 1
+arsigma = 1
+# Límite de integración
+r_max = 10 * arsigma
+r_min = 0.1 * arsigma
+# Temperaturas
+temperatures = [10, 15, 20, 25, 30, 35, 40]
 
-r = 1.5
-epsilon = 1.0
-sigma = 1.0
-miu = 0.5
+for T in temperatures:
 
-uSM = stock_mayerBIT(r, epsilon, sigma, miu)
-uLJ = leonard_jones(r, epsilon, sigma)
+    B, error = second_virial(T, epsilon, sigma, mu, r_max, r_min, arsigma)
 
-print("Potencial Stock-Mayer: ", uSM)
-print("Potencial Leonard-Jones: ", uLJ)
+    print(f"T = {T} K | B(T) = {B:.6e}")

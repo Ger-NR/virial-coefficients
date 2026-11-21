@@ -1,50 +1,49 @@
 import math
 
-def leonard_jones(r, epsilon, sigma):
+def leonard_jones_perkB(r, epsilon, sigma):
     """
-    Calculates the Leonard-Jones Potential
+    Calculates the Leonard-Jones Potential per kB using reduced units
 
-    u(r, epsilon, sigma) = 
+    u(r, epsilon, sigma)/kB = 
     4*epsilon ((sigma/r)**12 - (sigma/r)**6)
 
     Parameters:
         -----------
         r : float
-            Intermolecular radius
+            Intermolecular radius divided by Argon's sigma
         epsilon : float
-            Deph of the potential well
+            Deph of the potential well divided by kB
         sigma : float
-            Distance where potential is zero
-            (molecule radius related)
+            Molecule radius divided by Argon's
     """
     ratio = sigma/r
     potential = 4*epsilon*((ratio)**12 - (ratio)**6)
     return potential
 
-def stock_mayerBIT(r, epsilon, sigma, miu):
+def stock_mayerBIT_perkB(r, epsilon, sigma, mu):
     """
-    Calculates the Stock-Mayer potential
+    Calculates the Stock-Mayer potential per kB using reduced units
     (Leonard-Jones + Dipole-Dipole interaction)
     Note: Dipole - Dipole Contribution is based on the proposal by
     Ibarra-Tandi, B. at the "Molecular physics" curse in Autumn 2026
 
-    u(r, epsilon, sigma, miu) =
-    4*epsilon ((sigma/r)**12 - (sigma/r)**6) - miu**3/r**3
+    u(r, epsilon, sigma, mu) =
+    4*epsilon ((sigma/r)**12 - (sigma/r)**6) - mu**3/r**3
 
     Parameters:
     -----------
     r : float
-        Intermolecular radius
+        Intermolecular radius per Argon's sigma
     epsilon : float
-        Deph of the potential well
+        Deph of the potential well per kB
     sigma : float
-        Distance where potential is zero
-        (molecule radius related)
-    miu : float
+        Molecule radius divided by Argon's
+    mu : float
         Dipole-Dipole contribution coefficient
     """
     ratio = sigma/r
-    potential = 4*epsilon*((ratio)**12 - (ratio)**6) - (miu**3)/(r**3)
+    potential = 4*epsilon*((ratio)**12 - (ratio)**6) - (mu/r)**3
+
     return potential
 
 
